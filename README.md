@@ -1,6 +1,6 @@
 #resin.io + python + raspberry pi camera module
 
-This is a simple app that demonstrates how to get started with the raspberry pi camera module. All it does is snap one photo and then stores it in the /data directory on the pi. 
+This is a simple app that demonstrates how to get started with the raspberry pi camera module. All it does is snap one photo and then stores it in the /data directory on the pi.
 
 You will need to make some changes to the downloaded RPI/RPI2 image to enable the camera, instructions here -> [http://docs.resin.io/#/pages/hardware/i2c-and-spi.md#raspberry-pi-camera-module](http://docs.resin.io/#/pages/hardware/i2c-and-spi.md#raspberry-pi-camera-module)
 
@@ -13,3 +13,11 @@ This option can be found in the `Actions` tab in your device dashboard.
 ![Actions Tab](/img/enable-public-URLs.png)
 
 This example makes use of the awesome [picamera](http://picamera.readthedocs.org/en/release-1.8/) python module, which natively controls the camera module and does not depend on raspistill.
+
+
+## Setup
+
+To run Python scripts locally, setup a virtualenv for them. Run these in your local repository directory:
+
+    mkvirtualenv -a . coffee-watch
+    pip install -r requirements.txt
