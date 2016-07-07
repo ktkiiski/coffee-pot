@@ -15,6 +15,11 @@ This option can be found in the `Actions` tab in your device dashboard.
 This example makes use of the awesome [picamera](http://picamera.readthedocs.org/en/release-1.8/) python module, which natively controls the camera module and does not depend on raspistill.
 
 
+## To read
+
+- [Getting Started with Raspberry Pi 1 or ZERO and Node.js](https://docs.resin.io/raspberrypi/nodejs/getting-started/)
+
+
 ## Setup
 
 To run Python scripts locally, setup a virtualenv for them. Run these in your local repository directory:
