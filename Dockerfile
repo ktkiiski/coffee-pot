@@ -1,6 +1,6 @@
-FROM resin/raspberrypi-python:2.7.11
+FROM resin/raspberrypi-python:3.5.1
 
-#switch on systemd init system in container
+# switch on systemd init system in container
 ENV INITSYSTEM on
 
 # pip install python deps from requirements.txt
