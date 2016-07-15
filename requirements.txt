@@ -1,1 +1,2 @@
-picamera
+Django==1.9.7
+picamera==1.12
