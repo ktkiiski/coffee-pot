@@ -1,5 +1,8 @@
 #!/bin/bash
-# python manage.py migrate                  # Apply database migrations
+
+# Apply database migrations
+python manage.py migrate
+
 # python manage.py collectstatic --noinput  # Collect static files
 
 # Prepare log files and start outputting logs to stdout
