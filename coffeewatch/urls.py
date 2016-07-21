@@ -14,8 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url
-from slackbot.views import CommandView
+from coffeebot.views import CommandView
 
 urlpatterns = [
-    url(r'^slack/command', CommandView.as_view()),
+    url(r'^$', CommandView.as_view()),
 ]
