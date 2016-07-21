@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from .serializers import CommandSerializer
 
 
-class CommandView(views.APIView):
+class CoffeeStatusView(views.APIView):
 
     serializer_class = CommandSerializer
 
