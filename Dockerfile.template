@@ -1,4 +1,4 @@
-FROM resin/%%RESIN_MACHINE_NAME%%-python:3.5.1-slim
+FROM resin/%%RESIN_MACHINE_NAME%%-python:3.5.1
 
 # switch on systemd init system in container
 ENV INITSYSTEM on
