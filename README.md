@@ -28,6 +28,14 @@ On the following terminal sessions, run the following command to re-activate the
 workon coffee-watch
 ```
 
+## Repository structure
+
+Here's the function of different folders:
+
+- `barista`: The Django-powered HTTP server project folder. It contains a WSGI server application.
+- `coffeebot`: The Django "app" that is run by the `barista` project. It handles the command requests made from Slack.
+
+
 ## Running the HTTP server
 
 The Rasperry Pi runs a HTTP server, implemented with [Django](https://www.djangoproject.com/) for processing commands sent from Slack.
