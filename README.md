@@ -33,7 +33,7 @@ workon coffee-watch
 Here's the function of different folders:
 
 - `barista`: The Django-powered HTTP server project folder. It contains a WSGI server application.
-- `coffeebot`: The Django "app" that is run by the `barista` project. It handles the command requests made from Slack.
+- `coffeestatus`: The Django "app" that is run by the `barista` project. It handles the command requests made from Slack.
 
 
 ## Running the HTTP server

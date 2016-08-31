@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
 
     # Our own apps
-    'coffeebot.apps.CoffeebotConfig',
+    'coffeestatus.apps.CoffeeStatusConfig',
 ]
 
 MIDDLEWARE_CLASSES = [
