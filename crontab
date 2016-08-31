@@ -1,0 +1,2 @@
+# Execute the Python script every minute
+* * * * * root env - `cat /usr/src/app/envdump.txt` python /usr/src/app/hello.py >> /srv/logs/cronjobs.log 2>&1

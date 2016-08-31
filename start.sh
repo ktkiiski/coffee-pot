@@ -8,10 +8,18 @@ python manage.py migrate
 # Prepare log files and start outputting logs to stdout
 touch /srv/logs/gunicorn.log
 touch /srv/logs/access.log
+touch /srv/logs/cronjobs.log
 tail -n 0 -f /srv/logs/*.log &
 
+# Dump the environment variables to a file, for loading to cron
+env > envdump.txt
+
+# Start cron
+echo "Starting the Cron daemon..."
+cron -s
+
 # Start Gunicorn processes
-echo Starting Gunicorn.
+echo "Starting Gunicorn..."
 exec gunicorn coffeewatch.wsgi:application \
     --name coffeewatch \
     --bind 0.0.0.0:80 \
