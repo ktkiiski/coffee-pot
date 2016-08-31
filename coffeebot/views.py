@@ -18,9 +18,9 @@ class CoffeeStatusView(views.APIView):
         serializer.is_valid(raise_exception=True)
         response_data = {
             "text": "Hello, I'm a coffee bot! Unfortunately, my camera module is not installed yet. "
-                    "Instead, look how cute this wombat is!",
+                    "Please, pretend that this one is a photo of our coffee pot.",
             "attachments": [{
-                "image_url": "https://s.yimg.com/ea/img/-/150828/womabt_1atvht1-1atvi0t.jpg",
+                "image_url": "http://ak1.ostkcdn.com/img/mxc/091020_coffee-pot.jpg",
             }],
         }
         return Response(response_data, status=200)
