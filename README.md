@@ -34,7 +34,7 @@ Here's the function of different folders:
 
 - `barista`: The Django-powered HTTP server project folder. It contains a WSGI server application.
 - `coffeestatus`: The Django "app" that is run by the `barista` project. It handles the command requests made from Slack.
-
+- `webcam`: The Django "app" Python module containing database models for storing webcam photos, as logic for taking them.
 
 ## Running the HTTP server
 

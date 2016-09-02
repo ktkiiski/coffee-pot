@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     # Our own apps
     'coffeestatus.apps.CoffeeStatusConfig',
+    'webcam.apps.WebCamConfig',
 ]
 
 MIDDLEWARE = [
