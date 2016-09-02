@@ -1,0 +1,6 @@
+# These files are always ignored when Docker is copying files
+**/*.pyc
+**/__pycache__
+
+# Do not copy any local database
+db.sqlite3
