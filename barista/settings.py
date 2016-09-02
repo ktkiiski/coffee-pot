@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'coffeestatus.apps.CoffeeStatusConfig',
 ]
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.gzip.GZipMiddleware',
