@@ -7,7 +7,7 @@ def get_picture_path(picture, filename):
     created_at = picture.created_at.astimezone(utc)
     pic_date = created_at.strftime('%Y-%m-%d')
     pic_datetime = created_at.strftime('%Y-%m-%d %H.%M.%S')
-    return 'uploads/{}/{} {}'.format(pic_date, pic_datetime, filename)
+    return 'snapshots/{}/{} {}'.format(pic_date, pic_datetime, filename)
 
 
 class Picture(models.Model):
