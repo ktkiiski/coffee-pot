@@ -1,4 +1,9 @@
+# Ignore the local development database
 /db.sqlite3
+
+# Ignore the local development media folder
+/media
+
 # Ignore Python cache fiels
 __pycache__/
 *.pyc

@@ -15,6 +15,7 @@ COPY . /usr/src/app
 WORKDIR /usr/src/app
 
 # Set up configuration for the app
-ENV DATABASE_URL sqlite:////data/db.sqlite3
+ENV DATABASE_URL=sqlite:////data/db.sqlite3 \
+    MEDIA_PATH=/data/media/
 
 CMD ["bash","start.sh"]
