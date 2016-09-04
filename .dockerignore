@@ -4,3 +4,6 @@
 
 # Do not copy any local database
 db.sqlite3
+
+# Do not copy locally collected static fies
+staticfiles

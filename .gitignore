@@ -4,6 +4,10 @@
 # Ignore the local development media folder
 /media
 
+# Ignore the locally collected static files
+/media
+/staticfiles
+
 # Ignore Python cache fiels
 __pycache__/
 *.pyc
