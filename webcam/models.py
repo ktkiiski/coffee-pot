@@ -11,7 +11,7 @@ def get_picture_path(picture, filename):
     """
     created_at = picture.created_at.astimezone(utc)
     pic_date = created_at.strftime('%Y-%m-%d')
-    pic_datetime = created_at.strftime('%Y-%m-%d_%H.%M.%S')
+    pic_datetime = created_at.strftime('%Y-%m-%d_%H.%M.%S.%f')
     extension = filename.rsplit(".", 1)[-1]
     return 'snapshots/{}/{}.{}'.format(pic_date, pic_datetime, extension)
 
@@ -41,3 +41,12 @@ class Picture(models.Model):
     height = models.PositiveIntegerField(
         verbose_name="Image height",
     )
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return '{} {}'.format(
+            self.image.name.rsplit('.', 1)[-1].upper(),
+            self.created_at.strftime('%Y-%m-%d %H:%M:%S')
+        )
