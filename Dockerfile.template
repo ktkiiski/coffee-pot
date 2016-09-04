@@ -15,7 +15,11 @@ COPY . /usr/src/app
 WORKDIR /usr/src/app
 
 # Set up configuration for the app
-ENV DATABASE_URL=sqlite:////data/db.sqlite3 \
+ENV DJANGO_SETTINGS_MODULE=barista.settings \
+    DATABASE_URL=sqlite:////data/db.sqlite3 \
     MEDIA_PATH=/data/media/
+
+# Collect the static files
+RUN python manage.py collectstatic --noinput
 
 CMD ["bash","start.sh"]
