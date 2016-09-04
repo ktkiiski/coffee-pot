@@ -4,10 +4,16 @@ import uuid
 
 
 def get_picture_path(picture, filename):
+    """
+    Generates the path and filename for a picture where
+    the file will be saved within the MEDIA_ROOT folder.
+    It uses the picture's timestamp for the folder and filename.
+    """
     created_at = picture.created_at.astimezone(utc)
     pic_date = created_at.strftime('%Y-%m-%d')
-    pic_datetime = created_at.strftime('%Y-%m-%d %H.%M.%S')
-    return 'snapshots/{}/{} {}'.format(pic_date, pic_datetime, filename)
+    pic_datetime = created_at.strftime('%Y-%m-%d_%H.%M.%S')
+    extension = filename.rsplit(".", 1)[-1]
+    return 'snapshots/{}/{}.{}'.format(pic_date, pic_datetime, extension)
 
 
 class Picture(models.Model):
