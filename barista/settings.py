@@ -143,3 +143,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ),
 }
+
+# The token required by the command API, taken from the environment variable.
+# If undefined, then accept all the requests (useful when developing).
+SLACK_COMMAND_TOKEN = os.environ.get('SLACK_COMMAND_TOKEN', None)
