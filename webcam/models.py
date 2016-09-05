@@ -1,5 +1,8 @@
 from django.db import models
 from django.utils.timezone import utc
+from django.utils.safestring import mark_safe
+from django.utils.html import escape
+from datetime import datetime
 import uuid
 
 
@@ -9,7 +12,8 @@ def get_picture_path(picture, filename):
     the file will be saved within the MEDIA_ROOT folder.
     It uses the picture's timestamp for the folder and filename.
     """
-    created_at = picture.created_at.astimezone(utc)
+    now = datetime.now(utc)
+    created_at = now.astimezone(utc)
     pic_date = created_at.strftime('%Y-%m-%d')
     pic_datetime = created_at.strftime('%Y-%m-%d_%H.%M.%S.%f')
     extension = filename.rsplit(".", 1)[-1]
@@ -50,3 +54,8 @@ class Picture(models.Model):
             self.image.name.rsplit('.', 1)[-1].upper(),
             self.created_at.strftime('%Y-%m-%d %H:%M:%S')
         )
+
+    def image_tag(self):
+        return mark_safe('<img src="%s" style="max-width: 100%%" />' % (escape(self.image.url),))
+
+    image_tag.short_description = "Image"

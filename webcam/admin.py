@@ -1,3 +1,19 @@
 from django.contrib import admin
+from webcam.models import Picture
 
-# Register your models here.
+
+@admin.register(Picture)
+class AuthorAdmin(admin.ModelAdmin):
+    fields = (
+        'created_at',
+        'image_tag',
+        'image',
+        'width',
+        'height',
+    )
+    readonly_fields = (
+        'created_at',
+        'image_tag',
+        'width',
+        'height',
+    )
