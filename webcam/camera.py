@@ -1,10 +1,15 @@
+from django.conf import settings
 from django.core.files.images import ImageFile
 from django.utils.timezone import utc
 from .models import Picture
 from io import BytesIO
 from datetime import datetime
-import scipy.misc
 import time
+import random
+import os.path
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def capture_image():
@@ -13,7 +18,10 @@ def capture_image():
         import picamera
     except Exception:
         # Cannot import picamera, so let's use a dummy image instead
-        scipy.misc.imsave(stream, scipy.misc.face(), 'jpeg')
+        pic_folder = os.path.join(settings.BASE_DIR, "examples/snapshots")
+        img_path = os.path.join(pic_folder, random.choice(os.listdir(pic_folder)))
+        with open(img_path, 'rb') as img:
+            stream.write(img.read())
     else:
         with picamera.PiCamera() as camera:
             camera.resolution = (320, 240)
