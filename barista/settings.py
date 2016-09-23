@@ -164,3 +164,10 @@ REST_FRAMEWORK = {
 # The token required by the command API, taken from the environment variable.
 # If undefined, then accept all the requests (useful when developing).
 SLACK_COMMAND_TOKEN = os.environ.get('SLACK_COMMAND_TOKEN', None)
+
+# When the automatic snapshots should be taken?
+SNAPSHOT_SCHEDULE_TIMEZONE = os.environ.get('SNAPSHOT_SCHEDULE_TIMEZONE') or 'UTC'
+SNAPSHOT_SCHEDULE_INTERVAL = int(os.environ.get('SNAPSHOT_SCHEDULE_INTERVAL') or '1')
+SNAPSHOT_SCHEDULE_START_TIME = os.environ.get('SNAPSHOT_SCHEDULE_START_TIME') or '00:00'
+SNAPSHOT_SCHEDULE_END_TIME = os.environ.get('SNAPSHOT_SCHEDULE_END_TIME') or '23:59'
+SNAPSHOT_SCHEDULE_WEEKDAYS = os.environ.get('SNAPSHOT_SCHEDULE_WEEKDAYS') or '1,2,3,4,5,6,7'
