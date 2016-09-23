@@ -54,3 +54,16 @@ You can then start the server:
 ```bash
 python manage.py runserver
 ```
+
+## Configuration
+
+The app can be configured with environment variables:
+
+- `MEDIA_PATH`: The full path under which the Django will store files, especially the captured pictures. This already has a meaningful default in both local development and in the [Dockerfile](./Dockerfile.template)
+- `DATABASE_URL`: The database URI that configures where the SQlite database file is stored. E.g. `sqlite:////data/db.sqlite3`. This already has a meaningful default in both local development and in the [Dockerfile](./Dockerfile.template)
+- `SLACK_COMMAND_TOKEN`: The token that is required by Slack command requests. If not defined, then no token validation is done.
+- `SNAPSHOT_SCHEDULE_TIMEZONE`: The timezone in which the snapshot scheduling is set up. E.g. `Europe/Helsinki`. Defaults to `UTC`
+- `SNAPSHOT_SCHEDULE_INTERVAL`: The number of minutes between scheduled snapshots
+- `SNAPSHOT_SCHEDULE_START_TIME`: The time of the day when the scheduled snapshots begin, e.g. `07:00`
+- `SNAPSHOT_SCHEDULE_END_TIME`: The time of the day when the scheduled snapshots end, e.g. `17:00`
+- `SNAPSHOT_SCHEDULE_WEEKDAYS`: Comma separated list of integers, describing on which week days the scheduled snapshots are taken. Monday is `1`, Tuesday is `2`, and so on. E.g. `1,2,3,4,5`
