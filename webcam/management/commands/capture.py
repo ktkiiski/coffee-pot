@@ -31,7 +31,7 @@ class Command(BaseCommand):
             now_time = now.time()
             now_weekday = now.isoweekday()
             interval_mins = settings.SNAPSHOT_SCHEDULE_INTERVAL
-            interval = timedelta(minutes=settings.SNAPSHOT_SCHEDULE_INTERVAL) - timedelta(seconds=1)
+            interval = timedelta(minutes=settings.SNAPSHOT_SCHEDULE_INTERVAL) - timedelta(seconds=10)
             try:
                 min_now = Picture.objects.latest('created_at').created_at.astimezone(tz) + interval
             except Picture.DoesNotExist:
