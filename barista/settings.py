@@ -40,8 +40,9 @@ INSTALLED_APPS = [
     'rest_framework',
 
     # Our own apps
-    'coffeestatus.apps.CoffeeStatusConfig',
     'webcam.apps.WebCamConfig',
+    'recognition.apps.RecognitionConfig',
+    'coffeestatus.apps.CoffeeStatusConfig',
 ]
 
 MIDDLEWARE = [
