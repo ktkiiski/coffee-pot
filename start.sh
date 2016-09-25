@@ -5,6 +5,7 @@ set -e
 python manage.py migrate
 
 # Prepare log files and start outputting logs to stdout
+mkdir -p /srv/logs
 touch /srv/logs/gunicorn.log
 touch /srv/logs/access.log
 touch /srv/logs/cronjobs.log
