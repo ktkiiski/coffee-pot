@@ -28,7 +28,10 @@ class CoffeeStatusView(views.APIView):
         response_data["response_type"] = "in_channel"
         response_data["text"] = "Here's what it looks like at the kitchen."
         response_data["attachments"] = [
-            {"image_url": request.build_absolute_uri(pic.image.url)}
+            {
+                "fallback": "Web camera snapshot",
+                "image_url": request.build_absolute_uri(pic.image.url),
+            }
             for pic in Picture.objects.order_by('-created_at')[0:1]
         ]
         return Response(response_data, status=200)
