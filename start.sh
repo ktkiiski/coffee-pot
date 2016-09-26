@@ -14,10 +14,6 @@ tail -n 0 -f /srv/logs/*.log &
 # Dump the environment variables to a file, for loading to cron
 env > envdump.txt
 
-# Start cron
-echo "Starting the Cron daemon..."
-cron -s
-
 # Start Gunicorn processes
 echo "Starting Gunicorn..."
 exec gunicorn coffeewatch.wsgi:application \
