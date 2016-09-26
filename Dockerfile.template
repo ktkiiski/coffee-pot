@@ -8,9 +8,6 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
     cron \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Copy the cron file
-COPY ./crontab /etc/cron.d/
-
 # pip install python deps from requirements.txt
 # For caching until requirements.txt changes
 COPY ./requirements.txt /requirements.txt
@@ -23,6 +20,9 @@ WORKDIR /usr/src/app
 ENV DJANGO_SETTINGS_MODULE=barista.settings \
     DATABASE_URL=sqlite:////data/db.sqlite3 \
     MEDIA_PATH=/data/media/
+
+# Set up cron
+RUN cat ./crontab | crontab
 
 # Collect the static files
 RUN python manage.py collectstatic --noinput
