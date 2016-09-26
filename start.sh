@@ -16,8 +16,8 @@ env > envdump.txt
 
 # Start Gunicorn processes
 echo "Starting Gunicorn..."
-exec gunicorn coffeewatch.wsgi:application \
-    --name coffeewatch \
+exec gunicorn barista.wsgi:application \
+    --name barista \
     --bind 0.0.0.0:80 \
     --workers 3 \
     --log-level=info \
