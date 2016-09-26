@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# Enable the camera module
+modprobe bcm2835-v4l2
+
 # Apply database migrations
 python manage.py migrate
 
