@@ -1,6 +1,7 @@
 dj-database-url==0.4.1
 dj-static==0.0.6
 Django==1.10.1
+django-s3-storage==0.9.10
 djangorestframework==3.4.0
 gunicorn==19.6.0
 ipython==5.1.0
