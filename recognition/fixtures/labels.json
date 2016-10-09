@@ -1,0 +1,52 @@
+[
+{
+    "model": "recognition.label",
+    "pk": "empty",
+    "fields": {
+        "created_at": "2016-10-09T18:27:23.406Z",
+        "updated_at": "2016-10-09T18:27:26.741Z",
+        "title": "No coffee",
+        "description": "Coffee pots are empty! There is no coffee!"
+    }
+},
+{
+    "model": "recognition.label",
+    "pk": "full",
+    "fields": {
+        "created_at": "2016-10-09T18:25:24.947Z",
+        "updated_at": "2016-10-09T18:25:24.948Z",
+        "title": "Full coffee pots",
+        "description": "There is at least one coffee pot full of fresh coffee!"
+    }
+},
+{
+    "model": "recognition.label",
+    "pk": "little",
+    "fields": {
+        "created_at": "2016-10-09T18:27:06.429Z",
+        "updated_at": "2016-10-09T18:27:06.429Z",
+        "title": "Only some left!",
+        "description": "Hurry, there is only little coffee left!"
+    }
+},
+{
+    "model": "recognition.label",
+    "pk": "plenty",
+    "fields": {
+        "created_at": "2016-10-09T18:26:22.345Z",
+        "updated_at": "2016-10-09T18:26:25.525Z",
+        "title": "Plenty of coffee",
+        "description": "At least one coffee pot has plenty of coffee in it."
+    }
+},
+{
+    "model": "recognition.label",
+    "pk": "unknown",
+    "fields": {
+        "created_at": "2016-10-09T18:28:02.010Z",
+        "updated_at": "2016-10-09T18:28:02.010Z",
+        "title": "Unkown",
+        "description": "Cannot see properly if there is coffee or not!"
+    }
+}
+]
