@@ -1,3 +1,17 @@
 from django.contrib import admin
+from recognition.models import Label
 
-# Register your models here.
+
+@admin.register(Label)
+class AuthorAdmin(admin.ModelAdmin):
+    fields = (
+        'id',
+        'title',
+        'description',
+        'created_at',
+        'updated_at',
+    )
+    readonly_fields = (
+        'created_at',
+        'updated_at',
+    )
