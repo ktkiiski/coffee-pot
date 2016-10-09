@@ -3,6 +3,7 @@ from rest_framework import views
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from webcam.models import Picture
+from webcam.camera import take_picture
 from coffeestatus.serializers import CommandSerializer
 from collections import OrderedDict
 import random
@@ -25,6 +26,11 @@ class CoffeeStatusView(views.APIView):
         request = self.request
         serializer = self.serializer_class(data=request_data)
         serializer.is_valid(raise_exception=True)
+        if request_data.get('text') == 'now':
+            # Force save a snapshot
+            pictures = [take_picture()]
+        else:
+            pictures = list(Picture.objects.order_by('-created_at')[0:1])
         response_data = OrderedDict()
         response_data["response_type"] = "in_channel"
         response_data["text"] = random.choice(STATUS_TEXTS)
@@ -34,7 +40,7 @@ class CoffeeStatusView(views.APIView):
                 "image_url": request.build_absolute_uri(pic.image.url),
                 "text": random.choice(COFFEE_FACTS),
             }
-            for pic in Picture.objects.order_by('-created_at')[0:1]
+            for pic in pictures
         ]
         return Response(response_data, status=200)
 
