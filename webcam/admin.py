@@ -10,6 +10,7 @@ class AuthorAdmin(admin.ModelAdmin):
         'image',
         'width',
         'height',
+        'label',
     )
     readonly_fields = (
         'created_at',

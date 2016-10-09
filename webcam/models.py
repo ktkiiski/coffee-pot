@@ -45,6 +45,14 @@ class Picture(models.Model):
     height = models.PositiveIntegerField(
         verbose_name="Image height",
     )
+    label = models.ForeignKey(
+        'recognition.Label',
+        on_delete=models.DO_NOTHING,
+        db_constraint=False,
+        null=True, blank=True,
+        related_name="pictures",
+        verbose_name="Label",
+    )
 
     class Meta:
         ordering = ['-created_at']
