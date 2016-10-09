@@ -4,6 +4,9 @@ set -e
 # Enable the camera module
 modprobe bcm2835-v4l2
 
+# Collect the static files to Amazon S3
+python manage.py collectstatic --noinput
+
 # Apply database migrations
 python manage.py migrate
 

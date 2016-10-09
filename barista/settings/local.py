@@ -189,7 +189,7 @@ try:
     AWS_REGION = os.environ["AWS_REGION"]
 
     # A prefix to add to the start of all uploaded files.
-    AWS_S3_KEY_PREFIX = os.environ.get("AWS_S3_KEY_PREFIX") or ""
+    AWS_S3_KEY_PREFIX = os.environ.get("AWS_S3_KEY_PREFIX") or "media"
 
     # Whether to enable querystring authentication for uploaded files.
     AWS_S3_BUCKET_AUTH = False

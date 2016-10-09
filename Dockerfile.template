@@ -17,14 +17,11 @@ COPY . /usr/src/app
 WORKDIR /usr/src/app
 
 # Set up configuration for the app
-ENV DJANGO_SETTINGS_MODULE=barista.settings \
+ENV DJANGO_SETTINGS_MODULE=barista.settings.production \
     DATABASE_URL=sqlite:////data/db.sqlite3 \
     MEDIA_PATH=/data/media/
 
 # Set up cron
 RUN cat ./crontab | crontab
-
-# Collect the static files
-RUN python manage.py collectstatic --noinput
 
 CMD ["bash","start.sh"]
