@@ -13,6 +13,7 @@
         padding: 1em 0; 
     }
     .picture {
+        padding: 0.6em;
         margin-bottom: 1em;
     }
     .picture input[type=radio] {
@@ -26,6 +27,14 @@
     }
     .picture .media-body {
         padding: 0.5em;
+    }
+    .picture.odd {
+        background-color: #fdfdfd;
+        border: 1px solid #ddd;
+    }
+    .picture.even {
+        background-color: #ffffff;
+        border: 1px solid #ddd;
     }
     </style>
 </head>
@@ -41,7 +50,8 @@
             <div class="pictures">
                 {% for form in formset %}
                 {{ form.id }}
-                <div class="picture media">
+                <div class="picture media {% cycle 'odd' 'even' %}">
+                    <div class="float-xs-right text-muted h1">{{ forloop.counter }}</div>
                     <div class="media-left">
                         <img class="media-object" src="{{ form.instance.image.url }}">
                     </div>
@@ -63,8 +73,13 @@
         {% endif %}
 	</div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>-->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>-->
+    <script>
+        $('form').on('click', 'input[type=radio]', function(event) {
+            $(this).closest('.picture').hide();
+        });
+    </script>
 </body>
 
 </html>
