@@ -6,6 +6,7 @@ from recognition.models import Label
 class AuthorAdmin(admin.ModelAdmin):
     fields = (
         'id',
+        'order',
         'title',
         'description',
         'created_at',

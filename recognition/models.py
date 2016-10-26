@@ -21,11 +21,14 @@ class Label(models.Model):
         max_length=128,
     )
     description = models.TextField(
-        verbose_name="Description"
+        verbose_name="Description",
+    )
+    order = models.PositiveIntegerField(
+        verbose_name="Ordering",
     )
 
     class Meta:
-        ordering = ['id']
+        ordering = ['order']
 
     def __str__(self):
         return self.title
