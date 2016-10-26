@@ -1,3 +1,5 @@
+{% load tz %}
+{% localtime on %}
 <!doctype html>
 <html lang="en">
 
@@ -6,16 +8,59 @@
 	<title>Labelizer</title>
 	<meta name="description" content="Labelizer">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+    <style>
+    .pictures {
+        padding: 1em 0; 
+    }
+    .picture {
+        margin-bottom: 1em;
+    }
+    .picture input[type=radio] {
+        margin-right: 0.5em;
+    }
+    .picture .picture-label-option {
+        padding: 0 0.7em;
+    }
+    .picture .picture-label-option label {
+        margin: 0;
+    }
+    .picture .media-body {
+        padding: 0.5em;
+    }
+    </style>
 </head>
 
 <body>
     <div class="container">
-        {% for picture in pictures %}
-        <div class="picture">
-            <img class="picture-image" src="{{ picture.image.url }}">
-            <div class="picture-date">{{ picture.created_at | date:'c' }}
+        <h1>Labelizer <span class="tag tag-info">{{ unlabeled_count }}</span></h1>
+        {% if formset.forms %}
+        <p>Select a label for each image and and finally <strong>remember to click "Save"!</strong></p>
+        <form method="post" action="">
+            {% csrf_token %}
+            {{ formset.management_form }}
+            <div class="pictures">
+                {% for form in formset %}
+                {{ form.id }}
+                <div class="picture media">
+                    <div class="media-left">
+                        <img class="media-object" src="{{ form.instance.image.url }}">
+                    </div>
+                    <div class="media-body">
+                        <h6 class="media-heading">{{ form.instance.created_at | date:'Y-m-d H:i:s' }}</h6>
+                        {% for radio in form.label %}
+                        <div class="picture-label-option">{{ radio }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-lg btn-primary">Save</button>
+        </form>
+        {% else %}
+        <div class="alert alert-success">
+            Everything labeled!
         </div>
-        {% endfor %}
+        {% endif %}
 	</div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
@@ -23,3 +68,4 @@
 </body>
 
 </html>
+{% endlocaltime %}

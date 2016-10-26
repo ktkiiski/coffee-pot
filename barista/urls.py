@@ -16,13 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls import url
-from coffeestatus.views import CoffeeStatusView
-from recognition.views import LabelizerView
 from django.conf.urls.static import static
+from coffeestatus.views import CoffeeStatusView
+from recognition.views import labelize_pictures
 
 urlpatterns = [
     url(r'^$', CoffeeStatusView.as_view()),
-    url(r'^labelizer/?$', LabelizerView.as_view()),
+    url(r'^labelizer/?$', labelize_pictures, name="labelizer"),
     url(r'^admin/', admin.site.urls),
 ]
 # Serve static files in development

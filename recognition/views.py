@@ -1,18 +1,26 @@
 """
 Contains picture recognizion related view classes.
 """
-from django.views.generic import TemplateView
+from django.forms import modelformset_factory
+from django.shortcuts import render, redirect
 from webcam.models import Picture
+from .forms import PictureLabelizerForm
 
 
-class LabelizerView(TemplateView):
+def labelize_pictures(request):
     """
     Shows the HTML page for labelizing unlabeled pictures.
     """
-    template_name = "labelizer.html"
-
-    def get_context_data(self, **kwargs):
-        context = super(LabelizerView, self).get_context_data(**kwargs)
-        pics = Picture.objects.filter(label__isnull=True)
-        context['pictures'] = pics.order_by('-created_at')[0:10]
-        return context
+    form_set = modelformset_factory(Picture, form=PictureLabelizerForm, extra=0)
+    pics = Picture.objects.filter(label__isnull=True).order_by('-created_at')[0:10]
+    if request.method == 'POST':
+        formset = form_set(request.POST, request.FILES, queryset=pics)
+        if formset.is_valid():
+            formset.save()
+            return redirect('labelizer')
+    else:
+        formset = form_set(queryset=pics)
+    return render(request, 'labelizer.html', {
+        'formset': formset,
+        'unlabeled_count': Picture.objects.filter(label__isnull=True).count(),
+    })
