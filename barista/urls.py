@@ -19,10 +19,12 @@ from django.conf.urls import url
 from django.conf.urls.static import static
 from coffeestatus.views import CoffeeStatusView
 from recognition.views import labelize_pictures
+from webcam.views import dump_labeled_pics
 
 urlpatterns = [
     url(r'^$', CoffeeStatusView.as_view()),
     url(r'^labelizer/?$', labelize_pictures, name="labelizer"),
+    url(r'^dump/?$', dump_labeled_pics, name="dump_labeled_pics"),
     url(r'^admin/', admin.site.urls),
 ]
 # Serve static files in development
