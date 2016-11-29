@@ -36,6 +36,24 @@
         background-color: #ffffff;
         border: 1px solid #ddd;
     }
+    .picture .media-left {
+        position: relative;
+    }
+    .picture .media-left:after {
+        position: absolute;
+        display: block;
+        content: '';
+        background-color: rgba(255, 255, 255, 0.8); 
+        top: 0;
+        bottom: 0;
+        width: 50%;
+    }
+    .left .picture .media-left:after {
+        right: 0;
+    }
+    .right .picture .media-left:after {
+        left: 0;
+    }
     </style>
 </head>
 
@@ -58,6 +76,12 @@
                     <div class="media-body">
                         <h6 class="media-heading">{{ form.instance.created_at | date:'Y-m-d H:i:s' }}</h6>
                         {% for radio in form.label %}
+                        <div class="picture-label-option">{{ radio }}</div>
+                        {% endfor %}
+                        {% for radio in form.left_label %}
+                        <div class="picture-label-option">{{ radio }}</div>
+                        {% endfor %}
+                        {% for radio in form.right_label %}
                         <div class="picture-label-option">{{ radio }}</div>
                         {% endfor %}
                     </div>
