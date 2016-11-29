@@ -45,6 +45,7 @@ class Picture(models.Model):
     height = models.PositiveIntegerField(
         verbose_name="Image height",
     )
+    # The old label for the whole image
     label = models.ForeignKey(
         'recognition.Label',
         on_delete=models.DO_NOTHING,
@@ -53,9 +54,30 @@ class Picture(models.Model):
         related_name="pictures",
         verbose_name="Label",
     )
+    # The new labels for the left and right parts of the image
+    left_label = models.ForeignKey(
+        'recognition.Label',
+        on_delete=models.DO_NOTHING,
+        db_constraint=False,
+        null=True, blank=True,
+        related_name="left_pictures",
+        verbose_name="Left-side label",
+    )
+    right_label = models.ForeignKey(
+        'recognition.Label',
+        on_delete=models.DO_NOTHING,
+        db_constraint=False,
+        null=True, blank=True,
+        related_name="right_pictures",
+        verbose_name="Right-side label",
+    )
 
     class Meta:
         ordering = ['-created_at']
+        index_together = [
+            ('left_label', 'created_at'),
+            ('right_label', 'created_at'),
+        ]
 
     def __str__(self):
         return '{} {}'.format(
