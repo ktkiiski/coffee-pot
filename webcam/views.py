@@ -13,8 +13,9 @@ class Echo(object):
 
 def dump_labeled_pics(request):
     """A view that streams a labeled pictures as a CSV file."""
-    pics = Picture.objects.filter(label__isnull=False).order_by('created_at')
-    rows = ([pic.image.url, pic.label_id] for pic in pics.iterator())
+    pics = Picture.objects.filter(left_label__isnull=False, right_label__isnull=False)\
+        .order_by('created_at')
+    rows = ([pic.image.url, pic.left_label_id, pic.right_label_id] for pic in pics.iterator())
     pseudo_buffer = Echo()
     writer = csv.writer(pseudo_buffer)
     response = StreamingHttpResponse((writer.writerow(row) for row in rows),
