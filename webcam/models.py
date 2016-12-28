@@ -71,6 +71,23 @@ class Picture(models.Model):
         related_name="right_pictures",
         verbose_name="Right-side label",
     )
+    # The automatically recognized labels for the image
+    recognized_left_label = models.ForeignKey(
+        'recognition.Label',
+        on_delete=models.DO_NOTHING,
+        db_constraint=False,
+        null=True, blank=True,
+        related_name="recognized_left_pictures",
+        verbose_name="Recognized left-side label",
+    )
+    recognized_right_label = models.ForeignKey(
+        'recognition.Label',
+        on_delete=models.DO_NOTHING,
+        db_constraint=False,
+        null=True, blank=True,
+        related_name="recognized_right_pictures",
+        verbose_name="Recognized right-side label",
+    )
 
     class Meta:
         ordering = ['-created_at']
