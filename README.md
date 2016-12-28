@@ -1,4 +1,6 @@
-# Coffee Watch
+# Coffee Pot
+
+![Coffee Pot](examples/snapshots/2016-10-13_05.54.10.077663.jpg)
 
 The awesome webcam bot that watches your coffee pots and can be integrated with Slack.
 It is designed to be run on a Raspberry Pi with a camera module, and running on [Resin.io](resin.io) OS.
