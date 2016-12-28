@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.core.files.images import ImageFile
 from django.utils.timezone import utc
+from recognition.prediction import predict_picture_labels
 from .models import Picture
 from io import BytesIO
 from datetime import datetime
@@ -37,6 +38,8 @@ def take_picture():
     Takes a picture with the Rasperry Pi's camera module,
     and saves the file and a Picture model record for it.
 
+    It then tries to recognize the labels for the image.
+
     Returns the saved Picture model instance.
     """
     stream = capture_image()
@@ -44,4 +47,9 @@ def take_picture():
     now = datetime.now(utc)
     image_filename = '{}.jpg'.format(now.strftime('%Y-%m-%d_%H.%M.%S'))
     image_file = ImageFile(stream, name=image_filename)
-    return Picture.objects.create(image=image_file)
+    picture = Picture.objects.create(image=image_file)
+    try:
+        predict_picture_labels(picture)
+    except Exception:
+        logger.exception("Failed to recognize the labels for the image %s", str(picture))
+    return picture

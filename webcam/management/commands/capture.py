@@ -47,4 +47,8 @@ class Command(BaseCommand):
                 return
 
         pic = take_picture()
-        self.stdout.write(self.style.SUCCESS('Successfully captured a picture (ID: %s)' % pic.id))
+        self.stdout.write(
+            self.style.SUCCESS('Successfully captured a picture ({}, left: {}, right: {})'.format(
+                pic.image.url, pic.recognized_left_label_id, pic.recognized_right_label_id,
+            ))
+        )
