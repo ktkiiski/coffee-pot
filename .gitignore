@@ -11,3 +11,6 @@
 # Ignore Python cache fiels
 __pycache__/
 *.pyc
+
+# Ignore OS X files
+.DS_Store
