@@ -10,8 +10,8 @@ It is designed to be run on a Raspberry Pi with a camera module, and running on 
 Make a local clone of this repository:
 
 ```bash
-git clone git@github.com:ktkiiski/coffee-watch.git
-cd coffee-watch
+git clone git@github.com:ktkiiski/coffee-pot.git
+cd coffee-pot
 ```
 
 ### Python 3 virtualenv
@@ -19,14 +19,14 @@ cd coffee-watch
 To run Python scripts locally, [create a virtualenv](http://virtualenvwrapper.readthedocs.io/en/latest/) for them. You must use **Python 3**. Run these in your local repository directory:
 
 ```bash
-mkvirtualenv -a . --python=python3.5 coffee-watch
+mkvirtualenv -a . --python=python3.5 coffee-pot
 pip install -r requirements.txt
 ```
 
 On the following terminal sessions, run the following command to re-activate the virtualenv and switching to the working directory:
 
 ```bash
-workon coffee-watch
+workon coffee-pot
 ```
 
 ### Create Amazon S3 bundle
@@ -63,7 +63,7 @@ export AWS_S3_KEY_PREFIX="__dev_media"
 Then re-activate your virtualenv:
 
 ```bash
-deactivate && workon coffee-watch
+deactivate && workon coffee-pot
 ```
 
 ## Repository structure
@@ -97,22 +97,27 @@ python manage.py runserver
 
 ## Environment variables
 
-The app can be configured with environment variables:
+The app **must** be configured with the following required environment variables:
 
-Environment variable | Required | Description
----------------------|----------|------------
-`AWS_ACCESS_KEY_ID` | **Required** | Your AWS access key used to access the storage buckets.
-`AWS_SECRET_ACCESS_KEY` | **Required** | Your AWS secret access key used to access the storage buckets.
-`AWS_REGION` | **Required** | The region to connect to when storing files.
-`AWS_S3_BUCKET_NAME` | **Required** | The S3 bucket used to store uploaded files.
-`AWS_S3_KEY_PREFIX` | Optional | A prefix to add to the start of all uploaded files. Defaults to `media`. Allows sharing the same bucket with multiple environments.
-`DATABASE_URL` | Optional | The database URI that configures where the SQlite database file is stored. E.g. `sqlite:////data/db.sqlite3`. This already has a meaningful default in both local development and in the [Dockerfile](./Dockerfile.template)
-`SLACK_COMMAND_TOKEN` | Optional | The token that is required by Slack command requests. If not defined, then no token validation is done.
-`SNAPSHOT_SCHEDULE_TIMEZONE` | Optional | The timezone in which the snapshot scheduling is set up. E.g. `Europe/Helsinki`. Defaults to `UTC`
-`SNAPSHOT_SCHEDULE_INTERVAL` | Optional | The number of minutes between scheduled snapshots. Defaults to `1`
-`SNAPSHOT_SCHEDULE_START_TIME` | Optional | The time of the day when the scheduled snapshots begin, e.g. `07:00`. Defaults to `00:00`
-`SNAPSHOT_SCHEDULE_END_TIME` | Optional | The time of the day when the scheduled snapshots end, e.g. `17:00`. Defaults to `23:59`
-`SNAPSHOT_SCHEDULE_WEEKDAYS` | Optional | Comma separated list of integers, describing on which week days the scheduled snapshots are taken. Monday is `1`, Tuesday is `2`, and so on. E.g. `1,2,3,4,5`. Defaults to every day.
+Environment variable | Description
+---------------------|------------
+`AWS_ACCESS_KEY_ID` | Your AWS access key used to access the storage buckets.
+`AWS_SECRET_ACCESS_KEY` | Your AWS secret access key used to access the storage buckets.
+`AWS_REGION` | The region to connect to when storing files.
+`AWS_S3_BUCKET_NAME` | The S3 bucket used to store uploaded files.
+
+The _may_ be also configured with the following optional environment variables:
+
+Environment variable | Description
+---------------------|------------
+`AWS_S3_KEY_PREFIX` | A prefix to add to the start of all uploaded files. Defaults to `media`. Allows sharing the same bucket with multiple environments.
+`DATABASE_URL` | The database URI that configures where the SQlite database file is stored. E.g. `sqlite:////data/db.sqlite3`. This already has a meaningful default in both local development and in the [Dockerfile](./Dockerfile.template)
+`SLACK_COMMAND_TOKEN` | The token that is required by Slack command requests. If not defined, then no token validation is done.
+`SNAPSHOT_SCHEDULE_TIMEZONE` | The timezone in which the snapshot scheduling is set up. E.g. `Europe/Helsinki`. Defaults to `UTC`
+`SNAPSHOT_SCHEDULE_INTERVAL` | The number of minutes between scheduled snapshots. Defaults to `1`
+`SNAPSHOT_SCHEDULE_START_TIME` | The time of the day when the scheduled snapshots begin, e.g. `07:00`. Defaults to `00:00`
+`SNAPSHOT_SCHEDULE_END_TIME` | The time of the day when the scheduled snapshots end, e.g. `17:00`. Defaults to `23:59`
+`SNAPSHOT_SCHEDULE_WEEKDAYS` | Comma separated list of integers, describing on which week days the scheduled snapshots are taken. Monday is `1`, Tuesday is `2`, and so on. E.g. `1,2,3,4,5`. Defaults to every day.
 
 ## To read
 
