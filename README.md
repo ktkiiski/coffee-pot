@@ -1,21 +1,22 @@
 # Coffee Watch
 
-## To read
+The awesome webcam bot that watches your coffee pots and can be integrated with Slack.
+It is designed to be run on a Raspberry Pi with a camera module, and running on [Resin.io](resin.io) OS.
 
-- [Getting Started with Raspberry Pi 1 or ZERO and Node.js](https://docs.resin.io/raspberrypi/nodejs/getting-started/)
-- [picamera documentation](http://picamera.readthedocs.org/en/release-1.8/)
+## Local development
 
+### Clone the repository
 
-## Setup
-
-Clone this repository:
+Make a local clone of this repository:
 
 ```bash
 git clone git@github.com:ktkiiski/coffee-watch.git
 cd coffee-watch
 ```
 
-To run Python scripts locally, [create a virtualenv](http://virtualenvwrapper.readthedocs.io/en/latest/) for them. Run these in your local repository directory:
+### Python 3 virtualenv
+
+To run Python scripts locally, [create a virtualenv](http://virtualenvwrapper.readthedocs.io/en/latest/) for them. You must use **Python 3**. Run these in your local repository directory:
 
 ```bash
 mkvirtualenv -a . --python=python3.5 coffee-watch
@@ -28,6 +29,43 @@ On the following terminal sessions, run the following command to re-activate the
 workon coffee-watch
 ```
 
+### Create Amazon S3 bundle
+
+In order to work, you need a Amazon S3 bundle to which the captured images will be loaded. You also need to create an access key and a secret that allows uploading files to your bucket.
+
+### Configuration
+
+You then need to configure some environment variables.
+Your virtualenv post-activate hook is a nice place to do this:
+
+```bash
+nano $VIRTUALENVWRAPPER_HOOK_DIR/postactivate
+```
+
+Then add this to the file:
+
+```bash
+# Your AWS access key used to access the storage buckets.
+export AWS_ACCESS_KEY_ID="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+# Your AWS secret access key used to access the storage buckets.
+export AWS_SECRET_ACCESS_KEY="abcdefghijklmnopqrstuvwxyz1234567890"
+# The region to connect to when storing files.
+export AWS_REGION="eu-central-1"
+# The S3 bucket used to store uploaded files.
+export AWS_S3_BUCKET_NAME="coffee-pot"
+# A prefix to add to the start of all uploaded files. Defaults to "media".
+# Allows sharing the same bucket with multiple environments.
+export AWS_S3_KEY_PREFIX="__dev_media"
+```
+
+**For all configuration options, see [Environment variables](#environment-variables) below!**
+
+Then re-activate your virtualenv:
+
+```bash
+deactivate && workon coffee-watch
+```
+
 ## Repository structure
 
 Here's the function of different folders:
@@ -35,19 +73,21 @@ Here's the function of different folders:
 - `barista`: The Django-powered HTTP server project folder. It contains a WSGI server application.
 - `coffeestatus`: The Django "app" that is run by the `barista` project. It handles the command requests made from Slack.
 - `webcam`: The Django "app" Python module containing database models for storing webcam photos, as logic for taking them.
-- `examples`: Contains some extra files for development purposes. They are not used by the final app.
+- `examples`: Contains some example webcam snapshot files for local development, when an actual Raspberry Pi camera module is not available. When taking a snapshot, one of these images are chosen randomly.
 
 ## Running the HTTP server
 
-The Rasperry Pi runs a HTTP server, implemented with [Django](https://www.djangoproject.com/) for processing commands sent from Slack.
+The app runs a HTTP server, implemented with [Django](https://www.djangoproject.com/) for processing commands sent from Slack.
 
 Before you run the server for the first time, you should initialize the SQLite database:
 
 ```bash
 python manage.py migrate
+python manage.py loaddata labels
 ```
 
 This will run database migrations, creating a file `db.sqlite3` to the root of the repository (excluded from version control).
+The second line loads the default labels.
 
 You can then start the server:
 
@@ -55,17 +95,26 @@ You can then start the server:
 python manage.py runserver
 ```
 
-## Configuration
+## Environment variables
 
 The app can be configured with environment variables:
 
-Environment variable | Description
----------------------|------------
-`MEDIA_PATH` | The full path under which the Django will store files, especially the captured pictures. This already has a meaningful default in both local development and in the [Dockerfile](./Dockerfile.template)
-`DATABASE_URL` | The database URI that configures where the SQlite database file is stored. E.g. `sqlite:////data/db.sqlite3`. This already has a meaningful default in both local development and in the [Dockerfile](./Dockerfile.template)
-`SLACK_COMMAND_TOKEN` | The token that is required by Slack command requests. If not defined, then no token validation is done.
-`SNAPSHOT_SCHEDULE_TIMEZONE` | The timezone in which the snapshot scheduling is set up. E.g. `Europe/Helsinki`. Defaults to `UTC`
-`SNAPSHOT_SCHEDULE_INTERVAL` | The number of minutes between scheduled snapshots
-`SNAPSHOT_SCHEDULE_START_TIME` | The time of the day when the scheduled snapshots begin, e.g. `07:00`
-`SNAPSHOT_SCHEDULE_END_TIME` | The time of the day when the scheduled snapshots end, e.g. `17:00`
-`SNAPSHOT_SCHEDULE_WEEKDAYS` | Comma separated list of integers, describing on which week days the scheduled snapshots are taken. Monday is `1`, Tuesday is `2`, and so on. E.g. `1,2,3,4,5`
+Environment variable | Required | Description
+---------------------|----------|------------
+`AWS_ACCESS_KEY_ID` | **Required** | Your AWS access key used to access the storage buckets.
+`AWS_SECRET_ACCESS_KEY` | **Required** | Your AWS secret access key used to access the storage buckets.
+`AWS_REGION` | **Required** | The region to connect to when storing files.
+`AWS_S3_BUCKET_NAME` | **Required** | The S3 bucket used to store uploaded files.
+`AWS_S3_KEY_PREFIX` | Optional | A prefix to add to the start of all uploaded files. Defaults to `media`. Allows sharing the same bucket with multiple environments.
+`DATABASE_URL` | Optional | The database URI that configures where the SQlite database file is stored. E.g. `sqlite:////data/db.sqlite3`. This already has a meaningful default in both local development and in the [Dockerfile](./Dockerfile.template)
+`SLACK_COMMAND_TOKEN` | Optional | The token that is required by Slack command requests. If not defined, then no token validation is done.
+`SNAPSHOT_SCHEDULE_TIMEZONE` | Optional | The timezone in which the snapshot scheduling is set up. E.g. `Europe/Helsinki`. Defaults to `UTC`
+`SNAPSHOT_SCHEDULE_INTERVAL` | Optional | The number of minutes between scheduled snapshots. Defaults to `1`
+`SNAPSHOT_SCHEDULE_START_TIME` | Optional | The time of the day when the scheduled snapshots begin, e.g. `07:00`. Defaults to `00:00`
+`SNAPSHOT_SCHEDULE_END_TIME` | Optional | The time of the day when the scheduled snapshots end, e.g. `17:00`. Defaults to `23:59`
+`SNAPSHOT_SCHEDULE_WEEKDAYS` | Optional | Comma separated list of integers, describing on which week days the scheduled snapshots are taken. Monday is `1`, Tuesday is `2`, and so on. E.g. `1,2,3,4,5`. Defaults to every day.
+
+## To read
+
+- [Getting Started with Raspberry Pi 1 or ZERO and Node.js](https://docs.resin.io/raspberrypi/nodejs/getting-started/)
+- [picamera documentation](http://picamera.readthedocs.org/en/release-1.8/)
