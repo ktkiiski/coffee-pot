@@ -26,6 +26,8 @@ def predict_picture_labels(picture):
     left_label_id, left_label_prob = max(left_labels.items(), key=lambda i: i[1])
     # Save the labels
     picture.recognized_left_label_id = left_label_id
+    picture.recognized_left_probability = left_label_prob
     picture.recognized_right_label_id = right_label_id
+    picture.recognized_right_probability = right_label_prob
     picture.save()
     return picture
