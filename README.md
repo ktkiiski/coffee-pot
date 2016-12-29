@@ -97,6 +97,38 @@ You can then start the server:
 python manage.py runserver
 ```
 
+## Capturing pictures
+
+You can capture images by using the `capture` Django command:
+
+```bash
+python manage.py capture
+```
+
+You can capture conditionally only if the current time matches the configured schedules:
+
+```bash
+python manage.py capture --scheduled
+```
+
+If there is fresh coffee, you may also notify Slack, according to the configuration:
+
+```bash
+python manage.py capture --notify
+```
+
+Label prediction is done by default. You can disable it if you wish (but this also disables Slack notifications):
+
+```bash
+python manage.py capture --no-predict
+```
+
+More information:
+
+```bash
+python manage.py help capture
+```
+
 ## Environment variables
 
 The app **must** be configured with the following required environment variables:
