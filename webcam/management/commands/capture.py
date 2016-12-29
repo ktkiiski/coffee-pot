@@ -3,6 +3,7 @@ from django.conf import settings
 from django.core.management.base import BaseCommand
 from webcam.models import Picture
 from webcam.camera import take_picture
+from coffeestatus.watch import check_fresh_coffee
 from recognition.prediction import predict_picture_labels
 from pytz import timezone
 
@@ -46,15 +47,18 @@ class Command(BaseCommand):
         if not no_predict:
             predict_picture_labels(pic)
             self.stdout.write(
-                self.style.SUCCESS('Left label: "{}" ({}) / Right label: "{}" ({})'.format(
+                'Left label: "{}" ({}) / Right label: "{}" ({})'.format(
                     pic.recognized_left_label_id, pic.recognized_left_probability,
                     pic.recognized_right_label_id, pic.recognized_right_probability,
-                ))
-            )
-            if notify:
-                self.stdout.write(
-                    "TODO: Check for fresh coffee and notify Slack!"
                 )
+            )
+            fresh_coffee = check_fresh_coffee(pic)
+            if fresh_coffee:
+                self.stdout.write(self.style.SUCCESS(fresh_coffee))
+                if notify:
+                    self.stdout.write(
+                        "TODO: Check for fresh coffee and notify Slack!"
+                    )
 
     def should_take_picture(self):
         """
