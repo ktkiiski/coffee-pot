@@ -1,9 +1,10 @@
+from datetime import datetime
+from uuid import uuid1
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.timezone import utc
 from django.utils.safestring import mark_safe
 from django.utils.html import escape
-from datetime import datetime
-import uuid
 
 
 def get_picture_path(picture, filename):
@@ -24,7 +25,7 @@ class Picture(models.Model):
 
     id = models.UUIDField(
         primary_key=True,
-        default=uuid.uuid1,
+        default=uuid1,
         editable=False,
         verbose_name="Unique identifier",
     )
@@ -80,6 +81,14 @@ class Picture(models.Model):
         related_name="recognized_left_pictures",
         verbose_name="Recognized left-side label",
     )
+    recognized_left_probability = models.FloatField(
+        verbose_name="Recognized left-side label probability",
+        null=True, blank=True,
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(1),
+        ]
+    )
     recognized_right_label = models.ForeignKey(
         'recognition.Label',
         on_delete=models.DO_NOTHING,
@@ -87,6 +96,14 @@ class Picture(models.Model):
         null=True, blank=True,
         related_name="recognized_right_pictures",
         verbose_name="Recognized right-side label",
+    )
+    recognized_right_probability = models.FloatField(
+        verbose_name="Recognized right-side label probability",
+        null=True, blank=True,
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(1),
+        ]
     )
 
     class Meta:
