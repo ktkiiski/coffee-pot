@@ -1,8 +1,9 @@
 from datetime import datetime, time, timedelta
 from django.conf import settings
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from webcam.models import Picture
 from webcam.camera import take_picture
+from recognition.prediction import predict_picture_labels
 from pytz import timezone
 
 
@@ -24,23 +25,36 @@ class Command(BaseCommand):
             default=False,
             help='Check if there is now fresh coffee and notify Slack',
         )
+        parser.add_argument(
+            '--no-predict',
+            action='store_true',
+            dest='no_predict',
+            default=False,
+            help='Do not attempt to predict the picture labels. This also disables Slack notifications.',
+        )
 
-    def handle(self, *args, **options):
-        if options['scheduled'] and not self.should_take_picture():
+    def handle(self, *args, scheduled=False, no_predict=False, notify=False, **options):
+        if scheduled and not self.should_take_picture():
             # Should not take a picture
             return
 
         pic = take_picture()
         self.stdout.write(
-            self.style.SUCCESS('Successfully captured a picture ({}, left: {}, right: {})'.format(
-                pic.image.url, pic.recognized_left_label_id, pic.recognized_right_label_id,
-            ))
+            self.style.SUCCESS('Successfully captured a picture: {}'.format(pic.image.url))
         )
 
-        if options['notify']:
+        if not no_predict:
+            predict_picture_labels(pic)
             self.stdout.write(
-                "TODO: Check for fresh coffee and notify Slack!"
+                self.style.SUCCESS('Left label: "{}" ({}) / Right label: "{}" ({})'.format(
+                    pic.recognized_left_label_id, pic.recognized_left_probability,
+                    pic.recognized_right_label_id, pic.recognized_right_probability,
+                ))
             )
+            if notify:
+                self.stdout.write(
+                    "TODO: Check for fresh coffee and notify Slack!"
+                )
 
     def should_take_picture(self):
         """

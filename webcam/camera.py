@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.core.files.images import ImageFile
 from django.utils.timezone import utc
-from recognition.prediction import predict_picture_labels
 from .models import Picture
 from io import BytesIO
 from datetime import datetime
@@ -47,9 +46,4 @@ def take_picture():
     now = datetime.now(utc)
     image_filename = '{}.jpg'.format(now.strftime('%Y-%m-%d_%H.%M.%S'))
     image_file = ImageFile(stream, name=image_filename)
-    picture = Picture.objects.create(image=image_file)
-    try:
-        predict_picture_labels(picture)
-    except Exception:
-        logger.exception("Failed to recognize the labels for the image %s", str(picture))
-    return picture
+    return Picture.objects.create(image=image_file)
