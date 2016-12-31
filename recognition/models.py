@@ -35,7 +35,14 @@ class Label(models.Model):
         return self.title
 
 
+class LabelCombinationManager(models.Manager):
+    def get_by_natural_key(self, primary_label, secondary_label):
+        return self.get(primary_label=primary_label, secondary_label=secondary_label)
+
+
 class LabelCombination(models.Model):
+
+    objects = LabelCombinationManager()
 
     id = models.UUIDField(
         primary_key=True,
@@ -71,11 +78,6 @@ class LabelCombination(models.Model):
         "Use {primary_side} and {secondary_side} placeholders!",
     )
 
-    def __str__(self):
-        return "{} & {}: {}".format(
-            self.primary_label, self.secondary_label, self.description_template
-        )
-
     class Meta:
         unique_together = [
             ('primary_label', 'secondary_label'),
@@ -84,3 +86,11 @@ class LabelCombination(models.Model):
             '-primary_label__order',
             '-secondary_label__order',
         ]
+
+    def __str__(self):
+        return "{} & {}: {}".format(
+            self.primary_label, self.secondary_label, self.description_template
+        )
+
+    def natural_key(self):
+        return (self.primary_label, self.secondary_label)

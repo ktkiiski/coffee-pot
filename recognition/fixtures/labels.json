@@ -53,5 +53,155 @@
         "description": "Cannot see properly if there is coffee or not!",
         "order": 0
     }
+},
+{
+    "model": "recognition.labelcombination",
+    "fields": {
+        "created_at": "2016-12-31T18:07:39.833Z",
+        "updated_at": "2016-12-31T18:07:39.834Z",
+        "primary_label": "full",
+        "secondary_label": "empty",
+        "description_template": "The {primary_side} coffee pot is full, and the {secondary_side} is empty!"
+    }
+},
+{
+    "model": "recognition.labelcombination",
+    "fields": {
+        "created_at": "2016-12-31T18:14:59.293Z",
+        "updated_at": "2016-12-31T18:14:59.293Z",
+        "primary_label": "unknown",
+        "secondary_label": "unknown",
+        "description_template": "I'm sorry, I cannot see if there is any coffee in the pots."
+    }
+},
+{
+    "model": "recognition.labelcombination",
+    "fields": {
+        "created_at": "2016-12-31T18:08:10.504Z",
+        "updated_at": "2016-12-31T18:08:10.504Z",
+        "primary_label": "full",
+        "secondary_label": "unknown",
+        "description_template": "The {primary_side} coffee pot is full, but I'm not sure about the {secondary_side} one!"
+    }
+},
+{
+    "model": "recognition.labelcombination",
+    "fields": {
+        "created_at": "2016-12-31T18:08:49.434Z",
+        "updated_at": "2016-12-31T18:08:49.434Z",
+        "primary_label": "plenty",
+        "secondary_label": "plenty",
+        "description_template": "Both pots have plenty of coffee!"
+    }
+},
+{
+    "model": "recognition.labelcombination",
+    "fields": {
+        "created_at": "2016-12-31T18:09:56.299Z",
+        "updated_at": "2016-12-31T18:09:56.299Z",
+        "primary_label": "plenty",
+        "secondary_label": "little",
+        "description_template": "The {primary_side} pot has plenty of coffee, and the {secondary_side} one has little."
+    }
+},
+{
+    "model": "recognition.labelcombination",
+    "fields": {
+        "created_at": "2016-12-31T18:10:11.399Z",
+        "updated_at": "2016-12-31T18:10:11.399Z",
+        "primary_label": "plenty",
+        "secondary_label": "empty",
+        "description_template": "The {primary_side} pot has plenty of coffee, and the {secondary_side} one is empty."
+    }
+},
+{
+    "model": "recognition.labelcombination",
+    "fields": {
+        "created_at": "2016-12-31T18:10:31.521Z",
+        "updated_at": "2016-12-31T18:10:31.521Z",
+        "primary_label": "plenty",
+        "secondary_label": "unknown",
+        "description_template": "The {primary_side} pot has plenty of coffee, but I'm not sure about the {secondary_side} one."
+    }
+},
+{
+    "model": "recognition.labelcombination",
+    "fields": {
+        "created_at": "2016-12-31T18:12:48.133Z",
+        "updated_at": "2016-12-31T18:12:48.133Z",
+        "primary_label": "little",
+        "secondary_label": "little",
+        "description_template": "Both pots have only some coffee left."
+    }
+},
+{
+    "model": "recognition.labelcombination",
+    "fields": {
+        "created_at": "2016-12-31T18:13:11.906Z",
+        "updated_at": "2016-12-31T18:13:11.906Z",
+        "primary_label": "little",
+        "secondary_label": "empty",
+        "description_template": "The {primary_side} pot may have some coffee left, and the {secondary_side} one is empty."
+    }
+},
+{
+    "model": "recognition.labelcombination",
+    "fields": {
+        "created_at": "2016-12-31T18:06:07.278Z",
+        "updated_at": "2016-12-31T18:06:07.278Z",
+        "primary_label": "full",
+        "secondary_label": "full",
+        "description_template": "Wow! Both coffee pots are full!"
+    }
+},
+{
+    "model": "recognition.labelcombination",
+    "fields": {
+        "created_at": "2016-12-31T18:13:30.193Z",
+        "updated_at": "2016-12-31T18:13:30.193Z",
+        "primary_label": "little",
+        "secondary_label": "unknown",
+        "description_template": "The {primary_side} pot may have some coffee left, but I'm not sure about the {secondary_side} one."
+    }
+},
+{
+    "model": "recognition.labelcombination",
+    "fields": {
+        "created_at": "2016-12-31T18:13:50.820Z",
+        "updated_at": "2016-12-31T18:13:50.820Z",
+        "primary_label": "empty",
+        "secondary_label": "empty",
+        "description_template": "Both coffee pots are empty."
+    }
+},
+{
+    "model": "recognition.labelcombination",
+    "fields": {
+        "created_at": "2016-12-31T18:06:59.353Z",
+        "updated_at": "2016-12-31T18:06:59.353Z",
+        "primary_label": "full",
+        "secondary_label": "plenty",
+        "description_template": "The {primary_side} coffee pot is full, and the {secondary_side} also has plenty!"
+    }
+},
+{
+    "model": "recognition.labelcombination",
+    "fields": {
+        "created_at": "2016-12-31T18:14:16.048Z",
+        "updated_at": "2016-12-31T18:14:16.048Z",
+        "primary_label": "empty",
+        "secondary_label": "unknown",
+        "description_template": "The {primary_side} coffee pot is empty, and I'm not sure about the {secondary_side} one."
+    }
+},
+{
+    "model": "recognition.labelcombination",
+    "fields": {
+        "created_at": "2016-12-31T18:07:15.209Z",
+        "updated_at": "2016-12-31T18:07:15.209Z",
+        "primary_label": "full",
+        "secondary_label": "little",
+        "description_template": "The {primary_side} coffee pot is full, and the {secondary_side} also has some!"
+    }
 }
 ]
