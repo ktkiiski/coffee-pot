@@ -56,6 +56,7 @@
 },
 {
     "model": "recognition.labelcombination",
+    "pk": "046d0bd8-cf84-11e6-b60f-68a86d1115b8",
     "fields": {
         "created_at": "2016-12-31T18:07:39.833Z",
         "updated_at": "2016-12-31T18:07:39.834Z",
@@ -66,6 +67,7 @@
 },
 {
     "model": "recognition.labelcombination",
+    "pk": "0a5d5222-cf85-11e6-bc66-68a86d1115b8",
     "fields": {
         "created_at": "2016-12-31T18:14:59.293Z",
         "updated_at": "2016-12-31T18:14:59.293Z",
@@ -76,6 +78,7 @@
 },
 {
     "model": "recognition.labelcombination",
+    "pk": "16b4e126-cf84-11e6-abdd-68a86d1115b8",
     "fields": {
         "created_at": "2016-12-31T18:08:10.504Z",
         "updated_at": "2016-12-31T18:08:10.504Z",
@@ -86,6 +89,7 @@
 },
 {
     "model": "recognition.labelcombination",
+    "pk": "2de9783e-cf84-11e6-9a8c-68a86d1115b8",
     "fields": {
         "created_at": "2016-12-31T18:08:49.434Z",
         "updated_at": "2016-12-31T18:08:49.434Z",
@@ -96,6 +100,7 @@
 },
 {
     "model": "recognition.labelcombination",
+    "pk": "55c402ac-cf84-11e6-a16f-68a86d1115b8",
     "fields": {
         "created_at": "2016-12-31T18:09:56.299Z",
         "updated_at": "2016-12-31T18:09:56.299Z",
@@ -106,6 +111,7 @@
 },
 {
     "model": "recognition.labelcombination",
+    "pk": "5ec46862-cf84-11e6-951a-68a86d1115b8",
     "fields": {
         "created_at": "2016-12-31T18:10:11.399Z",
         "updated_at": "2016-12-31T18:10:11.399Z",
@@ -116,6 +122,7 @@
 },
 {
     "model": "recognition.labelcombination",
+    "pk": "6ac2a208-cf84-11e6-9bd9-68a86d1115b8",
     "fields": {
         "created_at": "2016-12-31T18:10:31.521Z",
         "updated_at": "2016-12-31T18:10:31.521Z",
@@ -126,6 +133,7 @@
 },
 {
     "model": "recognition.labelcombination",
+    "pk": "bc2ef55e-cf84-11e6-8e76-68a86d1115b8",
     "fields": {
         "created_at": "2016-12-31T18:12:48.133Z",
         "updated_at": "2016-12-31T18:12:48.133Z",
@@ -136,6 +144,7 @@
 },
 {
     "model": "recognition.labelcombination",
+    "pk": "ca595c00-cf84-11e6-ac75-68a86d1115b8",
     "fields": {
         "created_at": "2016-12-31T18:13:11.906Z",
         "updated_at": "2016-12-31T18:13:11.906Z",
@@ -146,6 +155,7 @@
 },
 {
     "model": "recognition.labelcombination",
+    "pk": "cd404e06-cf83-11e6-b394-68a86d1115b8",
     "fields": {
         "created_at": "2016-12-31T18:06:07.278Z",
         "updated_at": "2016-12-31T18:06:07.278Z",
@@ -156,6 +166,7 @@
 },
 {
     "model": "recognition.labelcombination",
+    "pk": "d541d2c0-cf84-11e6-bd37-68a86d1115b8",
     "fields": {
         "created_at": "2016-12-31T18:13:30.193Z",
         "updated_at": "2016-12-31T18:13:30.193Z",
@@ -166,6 +177,7 @@
 },
 {
     "model": "recognition.labelcombination",
+    "pk": "e18d4640-cf84-11e6-96d5-68a86d1115b8",
     "fields": {
         "created_at": "2016-12-31T18:13:50.820Z",
         "updated_at": "2016-12-31T18:13:50.820Z",
@@ -176,6 +188,7 @@
 },
 {
     "model": "recognition.labelcombination",
+    "pk": "ec4b2e9a-cf83-11e6-9ad1-68a86d1115b8",
     "fields": {
         "created_at": "2016-12-31T18:06:59.353Z",
         "updated_at": "2016-12-31T18:06:59.353Z",
@@ -186,6 +199,7 @@
 },
 {
     "model": "recognition.labelcombination",
+    "pk": "f09646f8-cf84-11e6-a1af-68a86d1115b8",
     "fields": {
         "created_at": "2016-12-31T18:14:16.048Z",
         "updated_at": "2016-12-31T18:14:16.048Z",
@@ -196,6 +210,7 @@
 },
 {
     "model": "recognition.labelcombination",
+    "pk": "f5bff546-cf83-11e6-93b2-68a86d1115b8",
     "fields": {
         "created_at": "2016-12-31T18:07:15.209Z",
         "updated_at": "2016-12-31T18:07:15.209Z",
