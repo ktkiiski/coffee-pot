@@ -51,35 +51,36 @@ class LabelCombination(models.Model):
         auto_now=True,
         verbose_name="Last update date/time",
     )
-    left_label = models.ForeignKey(
+    primary_label = models.ForeignKey(
         'recognition.Label',
         on_delete=models.DO_NOTHING,
         db_constraint=False,
         related_name="+",
-        verbose_name="Left-side label",
+        verbose_name="Primary label",
     )
-    right_label = models.ForeignKey(
+    secondary_label = models.ForeignKey(
         'recognition.Label',
         on_delete=models.DO_NOTHING,
         db_constraint=False,
         related_name="+",
-        verbose_name="Right-side label",
+        verbose_name="Secondary label",
     )
-    description = models.TextField(
-        verbose_name="Description",
-        help_text="What these two labels would be described together?",
+    description_template = models.TextField(
+        verbose_name="Description template",
+        help_text="What these two labels would be described together? "\
+        "Use {primary_side} and {secondary_side} placeholders!",
     )
 
     def __str__(self):
         return "{} & {}: {}".format(
-            self.left_label, self.right_label, self.description
+            self.primary_label, self.secondary_label, self.description_template
         )
 
     class Meta:
         unique_together = [
-            ('left_label', 'right_label'),
+            ('primary_label', 'secondary_label'),
         ]
         ordering = [
-            'left_label__order',
-            'right_label__order',
+            '-primary_label__order',
+            '-secondary_label__order',
         ]

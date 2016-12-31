@@ -21,9 +21,9 @@ class LabelAdmin(admin.ModelAdmin):
 @admin.register(LabelCombination)
 class LabelCombinationAdmin(admin.ModelAdmin):
     fields = (
-        'left_label',
-        'right_label',
-        'description',
+        'primary_label',
+        'secondary_label',
+        'description_template',
         'created_at',
         'updated_at',
     )
