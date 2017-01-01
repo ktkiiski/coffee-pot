@@ -3,7 +3,7 @@ from webcam.models import Picture
 
 
 @admin.register(Picture)
-class AuthorAdmin(admin.ModelAdmin):
+class PictureAdmin(admin.ModelAdmin):
     fields = (
         'created_at',
         'image_tag',
@@ -25,8 +25,5 @@ class AuthorAdmin(admin.ModelAdmin):
     )
     list_display = (
         'created_at',
-        'recognized_right_label',
-        'recognized_right_probability',
-        'recognized_left_label',
-        'recognized_left_probability',
+        'description',
     )

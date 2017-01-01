@@ -5,7 +5,9 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.timezone import utc
 from django.utils.safestring import mark_safe
 from django.utils.html import escape
+from recognition.models import LabelCombination
 
+DEFAULT_DESCRIPTION = "Sorry, I cannot say if there is any coffee."
 
 def get_picture_path(picture, filename):
     """
@@ -118,6 +120,27 @@ class Picture(models.Model):
             self.image.name.rsplit('.', 1)[-1].upper(),
             self.created_at.strftime('%Y-%m-%d %H:%M:%S')
         )
+
+    def description(self):
+        left_label = self.recognized_left_label
+        right_label = self.recognized_right_label
+        if not left_label or not right_label:
+            return DEFAULT_DESCRIPTION
+        labels = dict(left=left_label, right=right_label)
+        primary_side = max(labels.keys(), key=lambda side: labels[side].order)
+        secondary_side = next(key for key in labels.keys() if key != primary_side)
+        try:
+            comb = LabelCombination.objects.get(
+                primary_label=labels[primary_side],
+                secondary_label=labels[secondary_side],
+            )
+        except LabelCombination.DoesNotExist:
+            return DEFAULT_DESCRIPTION
+        else:
+            return comb.description_template.format(
+                primary_side=primary_side,
+                secondary_side=secondary_side,
+            )
 
     def image_tag(self):
         return mark_safe('<img src="%s" style="max-width: 100%%" />' % (escape(self.image.url),))
