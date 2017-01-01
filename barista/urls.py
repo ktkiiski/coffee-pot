@@ -25,6 +25,7 @@ from webcam.views import dump_labeled_pics
 
 urlpatterns = [
     url(r'^$', CoffeeStatusView.as_view()),
+    url(r'^status/?$', CoffeeStatusView.as_view()),
     url(r'^labelizer/?$', labelize_pictures, name="labelizer"),
     url(r'^labelizer/left/?$', labelize_picture_left_sides, name="left_labelizer"),
     url(r'^labelizer/right/?$', labelize_picture_right_sides, name="right_labelizer"),
