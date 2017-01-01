@@ -10,6 +10,9 @@ python manage.py collectstatic --noinput
 # Apply database migrations
 python manage.py migrate
 
+# Auto-load fixtures
+python manage.py loaddata labels
+
 # Prepare log files and start outputting logs to stdout
 mkdir -p /srv/logs
 touch /srv/logs/gunicorn.log
