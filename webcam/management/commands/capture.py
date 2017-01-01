@@ -3,7 +3,7 @@ from django.conf import settings
 from django.core.management.base import BaseCommand
 from webcam.models import Picture
 from webcam.camera import take_picture
-from coffeestatus.watch import check_fresh_coffee
+from coffeestatus.watch import check_fresh_coffee, notify_slack
 from recognition.prediction import predict_picture_labels
 from pytz import timezone
 
@@ -54,11 +54,11 @@ class Command(BaseCommand):
             )
             fresh_coffee = check_fresh_coffee(pic)
             if fresh_coffee:
-                self.stdout.write(self.style.SUCCESS(fresh_coffee))
                 if notify:
-                    self.stdout.write(
-                        "TODO: Check for fresh coffee and notify Slack!"
-                    )
+                    notify_slack(picture=pic, message=fresh_coffee)
+                    self.stdout.write(self.style.SUCCESS("Notified Slack: {}".format(fresh_coffee)))
+                else:
+                    self.stdout.write(self.style.SUCCESS(fresh_coffee))
 
     def should_take_picture(self):
         """

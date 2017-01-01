@@ -1,5 +1,7 @@
-from webcam.models import Picture
 from datetime import timedelta
+from django.conf import settings
+from webcam.models import Picture
+from requests import post
 
 FRESHNESS_DURATION = timedelta(minutes=10)
 FULL_LABEL_IDS = {'full'}
@@ -7,6 +9,21 @@ FULL_CERTAINTY = 0.7
 EMPTY_LABEL_IDS = {'empty', 'little'}
 EMPTY_CERTAINTY = 0.7
 
+
+def notify_slack(picture, message):
+    """
+    Notifies the Slack about the picture with the given message.
+    """
+    webhook_url = settings.SLACK_WEBHOOK_URL
+    if not webhook_url:
+        raise Exception("SLACK_WEBHOOK_URL is not configured")
+    return post(webhook_url, json={
+        "text": message,
+        "attachments": [{
+            "fallback": "Web camera snapshot",
+            "image_url": picture.image.url,
+        }]
+    })
 
 def check_fresh_coffee(picture):
     """
