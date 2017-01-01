@@ -4,9 +4,9 @@
     "pk": "empty",
     "fields": {
         "created_at": "2016-10-09T18:27:23.406Z",
-        "updated_at": "2016-10-26T18:56:20.891Z",
+        "updated_at": "2017-01-01T17:32:18.635Z",
         "title": "No coffee",
-        "description": "Coffee pots are empty! There is no coffee!",
+        "description": "The coffee pot is empty! There is no coffee!",
         "order": 1
     }
 },
@@ -15,9 +15,9 @@
     "pk": "full",
     "fields": {
         "created_at": "2016-10-09T18:25:24.947Z",
-        "updated_at": "2016-10-26T18:56:59.466Z",
-        "title": "Full coffee pots",
-        "description": "There is at least one coffee pot full of fresh coffee!",
+        "updated_at": "2017-01-01T17:31:36.811Z",
+        "title": "Full coffee pot",
+        "description": "The coffee pot is full of coffee.",
         "order": 4
     }
 },
@@ -37,9 +37,9 @@
     "pk": "plenty",
     "fields": {
         "created_at": "2016-10-09T18:26:22.345Z",
-        "updated_at": "2016-10-26T18:56:47.133Z",
+        "updated_at": "2017-01-01T17:32:46.415Z",
         "title": "Plenty of coffee",
-        "description": "At least one coffee pot has plenty of coffee in it.",
+        "description": "There is plenty of coffee in the coffee pot.",
         "order": 3
     }
 },
