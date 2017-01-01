@@ -1,3 +1,4 @@
+from random import choice
 from datetime import timedelta
 from django.conf import settings
 from webcam.models import Picture
@@ -60,10 +61,20 @@ def check_fresh_coffee(picture):
     right_was_empty = right_queryset.exists()
     right_is_fresh = right_full and right_was_empty
     # Determine message
+    template = choice([
+        "Guess what?! {} Go get some!",
+        "Attention! {} Hurry up!",
+        "Hot beverages available! {}",
+        "How about a break? {}",
+        "Hey! {} Get your ass to the kitchen!",
+        "I have important information to share: {}",
+        "Wohoo! {}",
+        "Kewl! {}",
+    ])
     if left_is_fresh and right_is_fresh:
-        return "There is fresh coffee in both pots!"
+        return template.format("There is fresh coffee in both pots!")
     if left_is_fresh:
-        return "There is fresh coffee in the left pot!"
+        return template.format("There is fresh coffee in the left pot!")
     if right_is_fresh:
-        return "There is fresh coffee in the right pot!"
+        return template.format("There is fresh coffee in the right pot!")
     return None
