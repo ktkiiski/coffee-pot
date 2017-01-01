@@ -166,6 +166,9 @@ REST_FRAMEWORK = {
 # If undefined, then accept all the requests (useful when developing).
 SLACK_COMMAND_TOKEN = os.environ.get('SLACK_COMMAND_TOKEN', None)
 
+# The Slack incoming webhook URL to which the information about the fresh coffee is POSTed
+SLACK_WEBHOOK_URL = os.environ.get('SLACK_WEBHOOK_URL', None)
+
 # When the automatic snapshots should be taken?
 SNAPSHOT_SCHEDULE_TIMEZONE = os.environ.get('SNAPSHOT_SCHEDULE_TIMEZONE') or 'UTC'
 SNAPSHOT_SCHEDULE_INTERVAL = int(os.environ.get('SNAPSHOT_SCHEDULE_INTERVAL') or '1')
@@ -173,30 +176,31 @@ SNAPSHOT_SCHEDULE_START_TIME = os.environ.get('SNAPSHOT_SCHEDULE_START_TIME') or
 SNAPSHOT_SCHEDULE_END_TIME = os.environ.get('SNAPSHOT_SCHEDULE_END_TIME') or '23:59'
 SNAPSHOT_SCHEDULE_WEEKDAYS = os.environ.get('SNAPSHOT_SCHEDULE_WEEKDAYS') or '1,2,3,4,5,6,7'
 
-# Check if the Amazon S3 should be used for storing the camera snapshots
-try:
-    # The AWS access key used to access the storage buckets.
-    AWS_ACCESS_KEY_ID = os.environ["AWS_ACCESS_KEY_ID"]
+# The AWS access key used to access the storage buckets.
+AWS_ACCESS_KEY_ID = os.environ["AWS_ACCESS_KEY_ID"]
 
-    # The AWS secret access key used to access the storage buckets.
-    AWS_SECRET_ACCESS_KEY = os.environ["AWS_SECRET_ACCESS_KEY"]
+# The AWS secret access key used to access the storage buckets.
+AWS_SECRET_ACCESS_KEY = os.environ["AWS_SECRET_ACCESS_KEY"]
 
-    # The S3 bucket used to store uploaded files.
-    AWS_S3_BUCKET_NAME = os.environ["AWS_S3_BUCKET_NAME"]
+# The S3 bucket used to store uploaded files.
+AWS_S3_BUCKET_NAME = os.environ["AWS_S3_BUCKET_NAME"]
 
-    # The region to connect to when storing files.
-    AWS_REGION = os.environ["AWS_REGION"]
+# The region to connect to when storing files.
+AWS_REGION = os.environ["AWS_REGION"]
 
-    # A prefix to add to the start of all uploaded files.
-    AWS_S3_KEY_PREFIX = os.environ.get("AWS_S3_KEY_PREFIX") or "media"
+# A prefix to add to the start of all uploaded files.
+AWS_S3_KEY_PREFIX = os.environ.get("AWS_S3_KEY_PREFIX") or "media"
 
-    # Whether to enable querystring authentication for uploaded files.
-    AWS_S3_BUCKET_AUTH = False
+# Whether to enable querystring authentication for uploaded files.
+AWS_S3_BUCKET_AUTH = False
 
-except KeyError:
-    # Amazon S3 is not configured
-    pass
+# The S3 bucket used to store static files.
+AWS_S3_BUCKET_NAME_STATIC = AWS_S3_BUCKET_NAME
 
-else:
-    # If everything went fine, then use the S3 Storage instead of the default storage
-    DEFAULT_FILE_STORAGE = "django_s3_storage.storage.S3Storage"
+# Whether to enable querystring authentication for static files.
+AWS_S3_BUCKET_AUTH_STATIC = False
+
+# A prefix to add to the start of all static files.
+AWS_S3_KEY_PREFIX_STATIC = os.environ.get("AWS_S3_KEY_PREFIX_STATIC") or "static"
+
+DEFAULT_FILE_STORAGE = "django_s3_storage.storage.S3Storage"

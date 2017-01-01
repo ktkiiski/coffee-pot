@@ -47,6 +47,8 @@ nano $VIRTUALENVWRAPPER_HOOK_DIR/postactivate
 Then add this to the file:
 
 ```bash
+# Your Slack webhook URL. Required if you want to make Slack notifications
+export SLACK_WEBHOOK_URL="https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
 # Your AWS access key used to access the storage buckets.
 export AWS_ACCESS_KEY_ID="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 # Your AWS secret access key used to access the storage buckets.
@@ -111,7 +113,7 @@ You can capture conditionally only if the current time matches the configured sc
 python manage.py capture --scheduled
 ```
 
-If there is fresh coffee, you may also notify Slack, according to the configuration:
+If there is fresh coffee, you may also notify Slack, according to the configuration. Note that this only works if the `SLACK_WEBHOOK_URL` environment variable is configured.
 
 ```bash
 python manage.py capture --notify
@@ -145,7 +147,9 @@ The _may_ be also configured with the following optional environment variables:
 Environment variable | Description
 ---------------------|------------
 `AWS_S3_KEY_PREFIX` | A prefix to add to the start of all uploaded files. Defaults to `media`. Allows sharing the same bucket with multiple environments.
+`AWS_S3_KEY_PREFIX_STATIC` | A prefix to add to the start of all static files when stored in Amazon S3 (in production). Defaults to `static`.
 `DATABASE_URL` | The database URI that configures where the SQlite database file is stored. E.g. `sqlite:////data/db.sqlite3`. This already has a meaningful default in both local development and in the [Dockerfile](./Dockerfile.template)
+`SLACK_WEBHOOK_URL` | The [Slack incoming webhook URL](https://api.slack.com/incoming-webhooks) to which Slack notifications are made. If not enabled then Slack notifications will be disabled.
 `SLACK_COMMAND_TOKEN` | The token that is required by Slack command requests. If not defined, then no token validation is done.
 `SNAPSHOT_SCHEDULE_TIMEZONE` | The timezone in which the snapshot scheduling is set up. E.g. `Europe/Helsinki`. Defaults to `UTC`
 `SNAPSHOT_SCHEDULE_INTERVAL` | The number of minutes between scheduled snapshots. Defaults to `1`
