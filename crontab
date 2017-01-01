@@ -1,2 +1,2 @@
 # Execute the Python script every minute
-* * * * * cd /usr/src/app && env - `cat envdump.txt` python manage.py capture --scheduled >> /srv/logs/cronjobs.log 2>&1
+* * * * * cd /usr/src/app && env - `cat envdump.txt` python manage.py capture --scheduled --notify >> /srv/logs/cronjobs.log 2>&1
