@@ -3,11 +3,11 @@ from django.conf import settings
 from webcam.models import Picture
 from requests import post
 
-FRESHNESS_DURATION = timedelta(minutes=10)
+FRESHNESS_DURATION = timedelta(minutes=15)
 FULL_LABEL_IDS = {'full'}
-FULL_CERTAINTY = 0.7
+FULL_CERTAINTY = 0.5
 EMPTY_LABEL_IDS = {'empty', 'little'}
-EMPTY_CERTAINTY = 0.7
+EMPTY_CERTAINTY = 0.5
 
 
 def notify_slack(picture, message):
