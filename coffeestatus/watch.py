@@ -5,7 +5,7 @@ from webcam.models import Picture
 from requests import post
 
 FRESHNESS_DURATION = timedelta(minutes=15)
-FULL_LABEL_IDS = {'full'}
+FULL_LABEL_IDS = {'plenty', 'full'}
 FULL_CERTAINTY = 0.5
 EMPTY_LABEL_IDS = {'empty', 'little'}
 EMPTY_CERTAINTY = 0.5
