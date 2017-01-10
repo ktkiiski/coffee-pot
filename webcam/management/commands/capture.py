@@ -34,33 +34,36 @@ class Command(BaseCommand):
             help='Do not attempt to predict the picture labels. This also disables Slack notifications.',
         )
 
-    def handle(self, *args, scheduled=False, no_predict=False, notify=False, **options):
-        if scheduled and not self.should_take_picture():
+    def handle(self, *args, scheduled=False, no_predict=False, notify=False, verbosity=1, **options):
+        if scheduled and not self.should_take_picture(verbosity=verbosity):
             # Should not take a picture
             return
 
         pic = take_picture()
-        self.stdout.write(
-            self.style.SUCCESS('Successfully captured a picture: {}'.format(pic.image.url))
-        )
+        if verbosity >= 1:
+            self.stdout.write(
+                self.style.SUCCESS('Successfully captured a picture: {}'.format(pic.image.url))
+            )
 
         if not no_predict:
             predict_picture_labels(pic)
-            self.stdout.write(
-                'Left label: "{}" ({}) / Right label: "{}" ({})'.format(
-                    pic.recognized_left_label_id, pic.recognized_left_probability,
-                    pic.recognized_right_label_id, pic.recognized_right_probability,
+            if verbosity >= 1:
+                self.stdout.write(
+                    'Left label: "{}" ({}) / Right label: "{}" ({})'.format(
+                        pic.recognized_left_label_id, pic.recognized_left_probability,
+                        pic.recognized_right_label_id, pic.recognized_right_probability,
+                    )
                 )
-            )
             fresh_coffee = check_fresh_coffee(pic)
             if fresh_coffee:
                 if notify:
                     notify_slack(picture=pic, message=fresh_coffee)
-                    self.stdout.write(self.style.SUCCESS("Notified Slack: {}".format(fresh_coffee)))
-                else:
+                    if verbosity >= 1:
+                        self.stdout.write(self.style.SUCCESS("Notified Slack: {}".format(fresh_coffee)))
+                elif verbosity >= 1:
                     self.stdout.write(self.style.SUCCESS(fresh_coffee))
 
-    def should_take_picture(self):
+    def should_take_picture(self, verbosity=1):
         """
         Check if the current timestamp is within the scheduled ranges.
         """
@@ -82,12 +85,15 @@ class Command(BaseCommand):
         except Picture.DoesNotExist:
             min_now = datetime(2000, 1, 1, tzinfo=tz)
         if now_weekday not in weekdays:
-            self.stdout.write('Capturing disabled this week day')
+            if verbosity >= 2:
+                self.stdout.write('Capturing disabled this week day')
             return False
         if not start_time <= now_time <= end_time:
-            self.stdout.write('Capturing disabled this time of the day')
+            if verbosity >= 2:
+                self.stdout.write('Capturing disabled this time of the day')
             return False
         if now < min_now:
-            self.stdout.write('Not enough time (%d mins) passed since the latest capture' % interval_mins)
+            if verbosity >= 2:
+                self.stdout.write('Not enough time (%d mins) passed since the latest capture' % interval_mins)
             return False
         return True
