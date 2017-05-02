@@ -29,6 +29,7 @@ exec gunicorn barista.wsgi:application \
     --name barista \
     --bind 0.0.0.0:80 \
     --workers 3 \
+    --timeout 300 \
     --log-level=info \
     --log-file=/srv/logs/gunicorn.log \
     --access-logfile=/srv/logs/access.log \
