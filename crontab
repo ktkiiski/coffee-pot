@@ -1,2 +1,4 @@
 # Execute the Python script every minute
 * * * * * cd /usr/src/app && env - `cat envdump.txt` python manage.py capture --scheduled --notify >> /srv/logs/cronjobs.log 2>&1
+# Reboot the device every night
+0 4 * * * /sbin/shutdown -r +5
