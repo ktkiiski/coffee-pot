@@ -18,6 +18,7 @@ mkdir -p /srv/logs
 touch /srv/logs/gunicorn.log
 touch /srv/logs/access.log
 touch /srv/logs/cronjobs.log
+touch /srv/logs/reboot.log
 tail -n 0 -f /srv/logs/*.log &
 
 # Dump the environment variables to a file, for loading to cron
