@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.shortcuts import redirect
 from rest_framework import views
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
@@ -43,6 +44,12 @@ class CoffeeStatusView(views.APIView):
             for pic in pictures
         ]
         return Response(response_data, status=200)
+
+
+def coffee_image_redirect(request):
+    # Redirect to the image URL of the latest pic
+    latest_pic = Picture.objects.latest('created_at')
+    return redirect(request.build_absolute_uri(pic.image.url))
 
 
 STATUS_TEXTS = [

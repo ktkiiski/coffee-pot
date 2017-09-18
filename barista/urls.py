@@ -18,6 +18,7 @@ from django.conf import settings
 from django.conf.urls import url
 from django.conf.urls.static import static
 from coffeestatus.views import CoffeeStatusView
+from coffeestatus.views import coffee_image_redirect
 from recognition.views import labelize_pictures
 from recognition.views import labelize_picture_left_sides
 from recognition.views import labelize_picture_right_sides
@@ -26,6 +27,7 @@ from webcam.views import dump_labeled_pics
 urlpatterns = [
     url(r'^$', CoffeeStatusView.as_view()),
     url(r'^status/?$', CoffeeStatusView.as_view()),
+    url(r'^img/?$', coffee_image_redirect),
     url(r'^labelizer/?$', labelize_pictures, name="labelizer"),
     url(r'^labelizer/left/?$', labelize_picture_left_sides, name="left_labelizer"),
     url(r'^labelizer/right/?$', labelize_picture_right_sides, name="right_labelizer"),
