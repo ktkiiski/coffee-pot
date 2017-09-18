@@ -49,7 +49,7 @@ class CoffeeStatusView(views.APIView):
 def coffee_image_redirect(request):
     # Redirect to the image URL of the latest pic
     latest_pic = Picture.objects.latest('created_at')
-    return redirect(request.build_absolute_uri(pic.image.url))
+    return redirect(request.build_absolute_uri(latest_pic.image.url))
 
 
 STATUS_TEXTS = [
