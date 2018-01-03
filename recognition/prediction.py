@@ -4,7 +4,7 @@ Integration for the picture labeling prediction.
 import requests
 
 # The endpoint that will be queried for the labels
-PREDICT_ENDPOINT = "http://staypleb.com/coffeebrain/predict/"
+PREDICT_ENDPOINT = "https://coffeebrain.int.giosg.com/predict"
 
 def predict_picture_labels(picture):
     """
